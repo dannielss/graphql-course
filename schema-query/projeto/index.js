@@ -12,18 +12,30 @@ const typeDefs = gql`
     vip: Boolean
   }
 
+  type Product {
+    name: String!
+    price: Float!
+    discount: Float
+    priceWithDiscount: Float
+  }
+
   # Pontos de entrada da sua API
   type Query {
     hello: String!
     now: Date!
     userLogged: User
+    productShow: Product
   }
 `
 
 const resolvers = {
-  User: {
-    salary(user) {
-      return user.real_salary
+  Product: {
+    priceWithDiscount(product) {
+      if(product.discount) {
+        return product.price * (1 - product.discount)
+      }else {
+        return product.price
+      }
     }
   },
 
@@ -42,8 +54,16 @@ const resolvers = {
         name: 'Ana',
         email: 'ana@hotmail.com',
         age: 23,
-        real_salary: 1000.00,
+        salary: 1000.00,
         vip: true
+      }
+    },
+
+    productShow() {
+      return {
+        name: 'Bolacha',
+        price: 5.50,
+        discount: 0.50
       }
     }
   }
