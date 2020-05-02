@@ -21,6 +21,12 @@ const typeDefs = gql`
 `
 
 const resolvers = {
+  User: {
+    salary(user) {
+      return user.real_salary
+    }
+  },
+
   Query: {
     hello() {
       return 'Bom dia!'
@@ -36,7 +42,7 @@ const resolvers = {
         name: 'Ana',
         email: 'ana@hotmail.com',
         age: 23,
-        salary: 1000.00,
+        real_salary: 1000.00,
         vip: true
       }
     }
