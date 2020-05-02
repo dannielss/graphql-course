@@ -3,21 +3,42 @@ const { ApolloServer, gql } = require('apollo-server');
 const typeDefs = gql`
   scalar Date
 
+  type User {
+    id: ID!
+    name: String!
+    email: String!
+    age: Int
+    salary: Float
+    vip: Boolean
+  }
+
   # Pontos de entrada da sua API
   type Query {
-    ola: String
-    horaAtual: Date
+    hello: String!
+    now: Date!
+    userLogged: User
   }
 `
 
 const resolvers = {
   Query: {
-    ola() {
+    hello() {
       return 'Bom dia!'
     },
 
-    horaAtual() {
+    now() {
       return new Date()
+    },
+
+    userLogged() {
+      return {
+        id: 1,
+        name: 'Ana',
+        email: 'ana@hotmail.com',
+        age: 23,
+        salary: 1000.00,
+        vip: true
+      }
     }
   }
 }
