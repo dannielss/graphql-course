@@ -25,6 +25,7 @@ const typeDefs = gql`
     now: Date!
     userLogged: User
     productShow: Product
+    numbers: [Int]!
   }
 `
 
@@ -65,6 +66,13 @@ const resolvers = {
         price: 5.50,
         discount: 0.50
       }
+    },
+
+    numbers() {
+      const numbers = (a, b) => a - b
+      return Array(6).fill(0)
+        .map(n => parseInt(Math.random() * 60 + 1))
+        .sort(numbers)
     }
   }
 }
