@@ -6,12 +6,12 @@ const users = [{
   email: "joao@hotmail.com",
   age: 28
 }, {
-  id: 1,
+  id: 2,
   name: 'ana',
   email: "ana@hotmail.com",
   age: 27
 }, {
-  id: 1,
+  id: 3,
   name: 'Carla',
   email: "carla@hotmail.com",
   age: 22
@@ -44,6 +44,7 @@ const typeDefs = gql`
     productShow: Product
     numbers: [Int]!
     users: [User]
+    user(id: ID): User
   }
 `
 
@@ -95,6 +96,11 @@ const resolvers = {
 
     users() {
       return users;
+    },
+
+    user(_, args) {
+      const sels = users.filter(u => u.id == args.id)
+      return sels ? sels[0] : null
     }
   }
 }
