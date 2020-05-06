@@ -15,6 +15,11 @@ const users = [{
   name: 'Carla',
   email: "carla@hotmail.com",
   age: 22
+},{
+  id: 4,
+  name: 'Carlos',
+  email: "carlos@hotmail.com",
+  age: 21
 }]
 
 const typeDefs = gql`
