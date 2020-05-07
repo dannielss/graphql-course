@@ -4,22 +4,26 @@ const users = [{
   id: 1,
   name: 'João',
   email: "joao@hotmail.com",
-  age: 28
+  age: 28,
+  profile_id: 1
 }, {
   id: 2,
   name: 'ana',
   email: "ana@hotmail.com",
-  age: 27
+  age: 27,
+  profile_id: 2
 }, {
   id: 3,
   name: 'Carla',
   email: "carla@hotmail.com",
-  age: 22
+  age: 22,
+  profile_id: 1
 },{
   id: 4,
   name: 'Carlos',
   email: "carlos@hotmail.com",
-  age: 21
+  age: 21,
+  profile_id: 1
 }]
 
 const profiles = [
@@ -29,15 +33,6 @@ const profiles = [
 
 const typeDefs = gql`
   scalar Date
-
-  type User {
-    id: ID!
-    name: String!
-    email: String!
-    age: Int
-    salary: Float
-    vip: Boolean
-  }
 
   type Product {
     name: String!
@@ -49,6 +44,16 @@ const typeDefs = gql`
   type Profile {
     id: ID!
     type: String!
+  }
+
+  type User {
+    id: ID!
+    name: String!
+    email: String!
+    age: Int
+    salary: Float
+    vip: Boolean
+    profile: Profile
   }
 
   # Pontos de entrada da sua API
@@ -73,6 +78,13 @@ const resolvers = {
       }else {
         return product.price
       }
+    }
+  },
+
+  User: {
+    profile(user) {
+      const profile = profiles.filter(p => p.id == user.profile_id)
+      return profile ? profile[0] : null
     }
   },
 
