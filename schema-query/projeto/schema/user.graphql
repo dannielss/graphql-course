@@ -3,6 +3,12 @@ type Profile {
   type: String!
 }
 
+enum UserStatus {
+  ATIVO,
+  INATIVO,
+  BLOQUEADO
+}
+
 type User {
   id: ID!
   name: String!
@@ -11,4 +17,5 @@ type User {
   salary: Float
   vip: Boolean
   profile: Profile
+  status: UserStatus
 }
