@@ -10,7 +10,7 @@ enum UserStatus {
 }
 
 type User {
-  id: ID!
+  id: Int!
   name: String!
   email: String!
   age: Int
@@ -18,4 +18,10 @@ type User {
   vip: Boolean
   profile: Profile
   status: UserStatus
+}
+
+input UserInput {
+  name: String
+  email: String
+  age: Int
 }
